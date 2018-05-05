@@ -3,7 +3,7 @@
 
 1.] RNN_Sequence2seq_Feature-extraction.py
 
-This is the implementation of paper -
+This is the implementation of feature extraction algorithm technique in paper -
 " Unsupervised Learning of Video Representations using LSTMs " by Nitish Srivastava, Elman Mansimov, Ruslan Salakhutdinov,
 https://arxiv.org/pdf/1502.04681.pdf 
 
