@@ -178,7 +178,7 @@ with tf.variable_scope("Decoder1") as scope:
     else:
         cell_dec1 = tf.contrib.rnn.MultiRNNCell([GRUCell(hidden_dim_list_dec[i]) for i in range(layers_stacked_count_dec)])
        
-    def loop_fn(time, cell_output, cell_state, loop_state):
+    def loop_fn1(time, cell_output, cell_state, loop_state):
         emit_output = cell_output  # == None for time == 0
         if cell_output is None:
             next_cell_state = encoder_final_state            
@@ -192,7 +192,7 @@ with tf.variable_scope("Decoder1") as scope:
         return (elements_finished, next_input, next_cell_state,
                 emit_output, next_loop_state)        
     
-    decoder_outputs_ta, decoder_final_state, _ = tf.nn.raw_rnn(cell_dec1, loop_fn)
+    decoder_outputs_ta, decoder_final_state, _ = tf.nn.raw_rnn(cell_dec1, loop_fn1)
     decoder_outputs1 = decoder_outputs_ta.stack()
     
     decoder_max_steps, decoder_batch_size, decoder_dim1 = tf.unstack(tf.shape(decoder_outputs1))
@@ -224,7 +224,7 @@ with tf.variable_scope("Decoder2") as scope:
     else:
         cell_dec2 = tf.contrib.rnn.MultiRNNCell([GRUCell(hidden_dim_list_dec[i]) for i in range(layers_stacked_count_dec)])
        
-    def loop_fn(time, cell_output, cell_state, loop_state):
+    def loop_fn2(time, cell_output, cell_state, loop_state):
         emit_output = cell_output  # == None for time == 0
         if cell_output is None:
             next_cell_state = encoder_final_state            
@@ -238,7 +238,7 @@ with tf.variable_scope("Decoder2") as scope:
         return (elements_finished, next_input, next_cell_state,
                 emit_output, next_loop_state)        
     
-    decoder_outputs_ta, decoder_final_state, _ = tf.nn.raw_rnn(cell_dec2, loop_fn)
+    decoder_outputs_ta, decoder_final_state, _ = tf.nn.raw_rnn(cell_dec2, loop_fn2)
     decoder_outputs2 = decoder_outputs_ta.stack()
     
     decoder_max_steps, decoder_batch_size, decoder_dim2 = tf.unstack(tf.shape(decoder_outputs2))
